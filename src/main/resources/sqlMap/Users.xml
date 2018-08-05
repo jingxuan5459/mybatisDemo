@@ -8,8 +8,7 @@
         select * from user where id = #{id}
     </select>
     <!-- 自定义条件查询用户列表 -->
-    <select id="findUserByUsername" parameterType="java.lang.String"
-            resultType="com.mybatisDemo.po.User">
+    <select id="findUserByUsername" parameterType="java.lang.String" resultType="com.mybatisDemo.po.User">
         select * from user where username like '%${value}%'
     </select>
 
@@ -17,4 +16,12 @@
         <selectKey keyProperty="id" order="AFTER" resultType="int">select LAST_INSERT_ID()</selectKey>
         insert into `user` (username, birthday, sex, address) VALUES(#{username}, #{birthday}, #{sex}, #{address})
     </insert>
+
+    <update id="updateUser" parameterType="com.mybatisDemo.po.User">
+        update `user` set username=#{username},birthday=#{birthday},sex=#{sex},address=#{address} where id=#{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from `user` where id = #{id}
+    </delete>
 </mapper>
